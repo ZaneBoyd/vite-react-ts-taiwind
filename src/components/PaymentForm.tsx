@@ -1,8 +1,10 @@
 import { useState, useRef, useEffect, useContext } from 'react';
-import { CartContext } from '../context/CartContext';
+import { CartContext } from '@/context/CartContext';
+import { useNavigate } from 'react-router-dom';
 
-export function PaymentForm({ onBack }: { onBack: () => void }) {
+export function PaymentForm() {
   const context = useContext(CartContext);
+  const navigate = useNavigate();
   const [name, setName] = useState('');
   const [cardNo, setCardNo] = useState('');
   const [isPaying, setIsPaying] = useState(false);
@@ -45,7 +47,7 @@ export function PaymentForm({ onBack }: { onBack: () => void }) {
         <h2 className="text-2xl font-bold text-emerald-600 mb-2">🎉 支付成功！</h2>
         <p className="text-gray-600">感谢您的信赖，AI 仓储正在为您火速打包发货...</p>
         <button
-          onClick={onBack}
+          onClick={() => navigate('/')}
           className="mt-6 px-6 py-2 bg-gray-900 text-white rounded-lg hover:bg-black transition-colors"
         >
           返回收银台
@@ -57,7 +59,7 @@ export function PaymentForm({ onBack }: { onBack: () => void }) {
   return (
     <div className="border-2 border-dashed border-emerald-500 p-8 rounded-2xl bg-emerald-50/50 max-w-md mx-auto">
       <button
-        onClick={onBack}
+        onClick={() => navigate('/')}
         className="text-sm text-gray-500 hover:text-emerald-600 mb-6 flex items-center gap-1 transition-colors"
       >
         ⬅️ 返回修改购物车

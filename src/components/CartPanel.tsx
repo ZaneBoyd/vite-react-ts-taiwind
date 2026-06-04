@@ -1,12 +1,10 @@
 import { useContext, useMemo } from 'react';
-import { CartContext } from '../context/CartContext';
+import { CartContext } from '@/context/CartContext';
+import { useNavigate } from 'react-router-dom';
 
-interface CartPanelProps {
-  onGoToPay: () => void;
-}
-
-export function CartPanel({ onGoToPay }: CartPanelProps) {
+export function CartPanel() {
   const context = useContext(CartContext);
+  const navigate = useNavigate();
 
   const { cartItems, addToCart, removeFromCart } = context || {
     cartItems: [],
@@ -70,7 +68,7 @@ export function CartPanel({ onGoToPay }: CartPanelProps) {
           <span className="text-xl font-bold text-emerald-600">${totalPrice.toFixed(2)}</span>
         </div>
         <button
-          onClick={onGoToPay}
+          onClick={() => navigate('/payment')}
           className="w-full bg-black text-white py-3 rounded-xl font-bold hover:bg-gray-800 transition-all active:scale-95"
         >
           去结算支付 ➡️
